@@ -95,7 +95,7 @@ void setup()
   {
     Serial.print("Didn't find PN53x board");
 //    while (1)
-//      ; // halt
+//      ; // stop if Board not found
   }
   // Got ok data, print it out!
   Serial.print("Found chip PN5");
@@ -125,7 +125,7 @@ void loop()
   void accesgranted();
   void accesdenied();
   void reset(); //reset Inputcode-array
-  _Bool checkid(double idcard);
+  _Bool checkid(double idcard); 
 
 //=====================================================================================================
 //ABFRAGE NFC
@@ -133,7 +133,7 @@ void loop()
   // Wait for an ISO14443A type cards (Mifare, etc.).  When one is found
   // 'uid' will be populated with the UID, and uidLength will indicate
   // if the uid is 4 bytes (Mifare Classic) or 7 bytes (Mifare Ultralight)
-  success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength,100);
+  success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength,100); // 100 is the time for a Timeout
 
   if (success)
   {
@@ -173,6 +173,7 @@ void loop()
 //=====================================================================================================
 //ABFRAGE ZAHLENFELD
 //TODO TIMEOUT
+//TODO MATRIX
   Serial.println("Abfrage Zahlenfeld");
 
   if (digitalRead(buttonStar) == LOW)
@@ -378,7 +379,7 @@ void loop()
 _Bool checkid(double idcard) //NFC ID's with Access
 {
   Serial.println(idcard);
-  if (idcard == 1111111111)
+  if (idcard == 1111111111) //here you need to add the id of your authorised card insted of 1's
   {
     Serial.println("Card1");
     return true;
@@ -408,7 +409,7 @@ void accesgranted()
   digitalWrite(ledOpen, HIGH);
     Serial.println(doorPin);
   analogWrite(doorPin, 255);
-  delay(2500); //1sec
+  delay(2500); //2.5sec
   digitalWrite(ledOpen, LOW);
   analogWrite(doorPin, 0);
 }
