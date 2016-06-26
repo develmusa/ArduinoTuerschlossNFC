@@ -3,6 +3,9 @@
 
 //Erweiterung auf NFC-TAGs 22.06.2016
 
+//Edited Matrix-Abfrage in for Loop
+//NOT TESTED
+
 //library https://github.com/adafruit/Adafruit-PN532
 
 #include <Wire.h>
@@ -39,10 +42,11 @@ Adafruit_PN532 nfc(PN532_SCK,
                    PN532_MOSI,
                    PN532_SS);
 
-//Bei PW wechsel k und secretCode anpassen !! oder mit Sizeof Array lösen
-const int k = 4; //Passwordlength
+
+const int k ; //Passwordlength
 const int maxIN = (10 + 1); //Max Input
-char secretCode[k] = {'1', '1', '1', '1'}; //Code anpassen
+char secretCode[] = {button1, button1, button1, button1}; //Code anpassen
+k = sizeof(secretCode)/sizeof(secretCode[0]);
 char inputCode[maxIN];
 
 #if defined(ARDUINO_ARCH_SAMD)
@@ -51,6 +55,8 @@ char inputCode[maxIN];
 #define Serial SerialUSB
 #endif
 
+
+//=============================================================================================================
 void setup()
 {
   Serial.begin(115200);
@@ -86,7 +92,7 @@ void setup()
   digitalWrite(buttonStar, HIGH);
   digitalWrite(buttonHash, HIGH);
 
-  Serial.println("Hello!");
+  Serial.println("Hello!"); //WHY NOT PRINTED?
 
   nfc.begin();
 
@@ -111,8 +117,10 @@ void setup()
   Serial.println("Waiting for an ISO14443A Card ...");
 }
 
+//=========================================================================================
 void loop()
 {
+	
   int n;  //VarCountNumber
   int i;  //VarInputCode
   int correct = 0;  //VarCountPW
@@ -126,10 +134,12 @@ void loop()
   void accesdenied();
   void reset(); //reset Inputcode-array
   _Bool checkid(double idcard); 
+  _Bool buttonPressed(int button);
 
 //=====================================================================================================
 //ABFRAGE NFC
   Serial.println("Abfrage NFC");
+  
   // Wait for an ISO14443A type cards (Mifare, etc.).  When one is found
   // 'uid' will be populated with the UID, and uidLength will indicate
   // if the uid is 4 bytes (Mifare Classic) or 7 bytes (Mifare Ultralight)
@@ -175,206 +185,83 @@ void loop()
 //TODO TIMEOUT
 //TODO MATRIX
   Serial.println("Abfrage Zahlenfeld");
+  
+  Zahlenfeld[3][4]={ 	{buton1,button2,button3}
+						{buton4,buton5,button6}
+						{button7,button8,button9}
+						{buttonStar,button0,buttonHash}}
 
-  if (digitalRead(buttonStar) == LOW)
-  {
+ ZahlenfeldPrint[3][4]={	{"--1--","--2--","--3--"}
+							{"--4--","--5--","--6--"}
+							{"--7--","--8--","--9--"}
+							{"--*--","--0--","--#--"}}						
+
+if (buttonPressd(buttonStar)
+{	  
     reset();
     while (1)
     {
-      if (digitalRead(buttonStar) == HIGH)
-      {
         Serial.println("--*--");
         delay(1);
-        do
+        while((!buttonPressed(buttonHash)&&(p<maxIN))
         {
+			for(n=0;n<3;n++)	//cols
+			{
+				for(m=0;m<4;m++) //rows
+				{
+					if (buttonPressd(Zahlenfeld[n][m])
+					{
+						inputCode[p] = (Zahlenfeld[n][m]);
+						Serial.println(ZahlenfeldPrint[n][m]);
+						delay(1);
+						++p;
+					}	
+				}
+			}	
+			if (buttonPressd(buttonHash))
+			{
+				Serial.println("--#--");
 
-          if (digitalRead(button0) == LOW)
-          {
-            while (1)
-            {
-              if (digitalRead(button0) == HIGH)
-              {
-                inputCode[p] = ('0');
-                Serial.println("--0--");
-                delay(1);
-                ++p;
-                break;
-              }
-            }
-          }
+				for (i = 0; i < (k); i++)
+				{
+				  if (inputCode[i] == secretCode[i])
+				  {
+					correct++;
+				  }
+				  
+				  //Check Code
+				  Serial.println("InputCode:");
+				  Serial.println(inputCode[i]);
+				  Serial.println("SecretCode:");
+				  Serial.println(secretCode[i]);
+				}
 
-          if (digitalRead(button1) == LOW)
-          {
-            while (1)
-              if (digitalRead(button1) == HIGH)
-              {
-                inputCode[p] = ('1');
-                Serial.println("--1--");
-                delay(1);
-                ++p;
-                break;
-              }
-          }
+				Serial.println("correct");
+				Serial.println(correct);
+				Serial.println("p");
+				Serial.println(p);
+				Serial.println("k");
+				Serial.println(k);
 
-          if (digitalRead(button2) == LOW)
-          {
-            while (1)
-              if (digitalRead(button2) == HIGH)
-              {
-                inputCode[p] = ('2');
-                Serial.println("--2--");
-                delay(1);
-                ++p;
-                break;
-              }
-          }
+				reset();
 
-          if (digitalRead(button3) == LOW)
-          {
-            while (1)
-              if (digitalRead(button3) == HIGH)
-              {
-                inputCode[p] = ('3');
-                Serial.println("--3--");
-                delay(1);
-                ++p;
-                break;
-              }
-          }
-
-          if (digitalRead(button4) == LOW)
-          {
-            while (1)
-              if (digitalRead(button4) == HIGH)
-              {
-                inputCode[p] = ('4');
-                Serial.println("--4--");
-                delay(1);
-                ++p;
-                break;
-              }
-          }
-
-          if (digitalRead(button5) == LOW)
-          {
-            while (1)
-              if (digitalRead(button5) == HIGH)
-              {
-                inputCode[p] = ('5');
-                Serial.println("--5--");
-                delay(1);
-                ++p;
-                break;
-              }
-          }
-
-          if (digitalRead(button6) == LOW)
-          {
-            while (1)
-              if (digitalRead(button6) == HIGH)
-              {
-                inputCode[p] = ('6');
-                Serial.println("--6--");
-                delay(1);
-                ++p;
-                break;
-              }
-          }
-
-          if (digitalRead(button7) == LOW)
-          {
-            while (1)
-              if (digitalRead(button7) == HIGH)
-              {
-                inputCode[p] = ('7');
-                Serial.println("--7--");
-                delay(1);
-                ++p;
-                break;
-              }
-          }
-
-          if (digitalRead(button8) == LOW)
-          {
-            while (1)
-              if (digitalRead(button8) == HIGH)
-              {
-                inputCode[p] = ('8');
-                Serial.println("--8--");
-                delay(1);
-                ++p;
-                break;
-              }
-          }
-
-          if (digitalRead(button9) == LOW)
-          {
-            while (1)
-              if (digitalRead(button9) == HIGH)
-              {
-                inputCode[p] = ('9');
-                Serial.println("--9--");
-                delay(1);
-                ++p;
-                break;
-              }
-          }
-        } while (digitalRead(buttonHash) == HIGH);
-        Serial.println("Break*");
-        break;
-      }
+				if ((correct == k) && (p == k))
+				{
+				  accesgranted();
+				  break;
+				}
+				else
+				{
+				  accesdenied();
+				  break;
+				} 
+			}
+        }
     }
-
-  }
-  if (digitalRead(buttonHash) == LOW)
-  {
-    Serial.println("--#--");
-    Serial.println("--P: ");
-    Serial.println(p);
-    Serial.println("--maxIn");
-    Serial.println(maxIN);
-    while (1)
-    {
-      if (digitalRead(buttonHash) == HIGH)
-      {
-        for (i = 0; i < (k); i++)
-        {
-          if (inputCode[i] == secretCode[i])
-          {
-            correct++;
-          }
-          //Check Code
-          Serial.println("InputCode:");
-          Serial.println(inputCode[i]);
-          Serial.println("SecretCode:");
-          Serial.println(secretCode[i]);
-        }
-
-        Serial.println("correct");
-        Serial.println(correct);
-        Serial.println("p");
-        Serial.println(p);
-        Serial.println("k");
-        Serial.println(k);
-
-        reset();
-
-        if ((correct == k) && (p == k))
-        {
-          accesgranted();
-          break;
-        }
-        else
-        {
-          accesdenied();
-          break;
-        }
-      }
-    }
-  }
 }
 
 //=================================================================================================
+
 
 _Bool checkid(double idcard) //NFC ID's with Access
 {
@@ -402,12 +289,24 @@ _Bool checkid(double idcard) //NFC ID's with Access
   }
 }
 
+_Bool buttonPressed(int button)
+{
+	if (digitalRead(button) == LOW)
+	  {
+		while (1)
+		{
+		  if (digitalRead(button) == HIGH)
+				return true;
+		}
+return false;
+}
+
 void accesgranted()
 {
   Serial.println("Access granted");
   delay(1);
   digitalWrite(ledOpen, HIGH);
-    Serial.println(doorPin);
+  Serial.println(doorPin);
   analogWrite(doorPin, 255);
   delay(2500); //2.5sec
   digitalWrite(ledOpen, LOW);
