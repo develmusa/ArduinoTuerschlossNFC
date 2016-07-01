@@ -42,11 +42,9 @@ Adafruit_PN532 nfc(PN532_SCK,
                    PN532_MOSI,
                    PN532_SS);
 
-
-const int k ; //Passwordlength
 const int maxIN = (10 + 1); //Max Input
 char secretCode[] = {button1, button1, button1, button1}; //Code anpassen
-k = sizeof(secretCode)/sizeof(secretCode[0]);
+const int k = sizeof(secretCode) / sizeof(secretCode[0]); //Passwordlength
 char inputCode[maxIN];
 
 #if defined(ARDUINO_ARCH_SAMD)
@@ -54,7 +52,6 @@ char inputCode[maxIN];
 // also change #define in Adafruit_PN532.cpp library file
 #define Serial SerialUSB
 #endif
-
 
 //=============================================================================================================
 void setup()
@@ -120,11 +117,11 @@ void setup()
 //=========================================================================================
 void loop()
 {
-	
-  int n;  //VarCountNumber
-  int i;  //VarInputCode
-  int correct = 0;  //VarCountPW
-  int p = 0; //VarCountlenghtIN
+
+  int n;              //VarCountNumber
+  int i;              //VarInputCode
+  int correct = 0;    //VarCountPW
+  int p = 0;          //VarCountlenghtIN
 
   uint8_t success;
   uint8_t uid[] = {0, 0, 0, 0, 0, 0, 0};  // Buffer to store the returned UID
@@ -132,18 +129,19 @@ void loop()
 
   void accesgranted();
   void accesdenied();
-  void reset(); //reset Inputcode-array
-  _Bool checkid(double idcard); 
+  void reset();       //reset Inputcode-array
+  _Bool checkid(double idcard);
   _Bool buttonPressed(int button);
 
 //=====================================================================================================
 //ABFRAGE NFC
   Serial.println("Abfrage NFC");
-  
+
   // Wait for an ISO14443A type cards (Mifare, etc.).  When one is found
   // 'uid' will be populated with the UID, and uidLength will indicate
   // if the uid is 4 bytes (Mifare Classic) or 7 bytes (Mifare Ultralight)
-  success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength,100); // 100 is the time for a Timeout
+  success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength,
+                                    100); // 100 is the time for a Timeout
 
   if (success)
   {
@@ -185,83 +183,91 @@ void loop()
 //TODO TIMEOUT
 //TODO MATRIX
   Serial.println("Abfrage Zahlenfeld");
-  
-  Zahlenfeld[3][4]={ 	{buton1,button2,button3}
-						{buton4,buton5,button6}
-						{button7,button8,button9}
-						{buttonStar,button0,buttonHash}}
 
- ZahlenfeldPrint[3][4]={	{"--1--","--2--","--3--"}
-							{"--4--","--5--","--6--"}
-							{"--7--","--8--","--9--"}
-							{"--*--","--0--","--#--"}}						
+  int Zahlenfeld[4][3] = {  {button1, button2, button3},
+                            {button4, button5,button6},
+                            {button7, button8, button9},
+                            {buttonStar, button0, buttonHash}
+                          };
 
-if (buttonPressd(buttonStar)
-{	  
+  char* ZahlenfeldPrint[4][3] = { {"--1--", "--2--", "--3--"},
+                                  {"--4--","--5--", "--6--"},
+                                  {"--7--", "--8--", "--9--"},
+                                  {"--*--", "--0--", "--#--"}
+                                };
+
+  if (buttonPressed(buttonStar))
+  {
     reset();
     while (1)
     {
-        Serial.println("--*--");
-        delay(1);
-        while((!buttonPressed(buttonHash)&&(p<maxIN))
+      Serial.println("--*--");
+      delay(1);
+
+      while ((!buttonPressed(buttonHash) && (p < maxIN)))
+      {
+        //Reset rows and cols var for loop
+        int n = 0;
+        int m = 0;
+
+        for (n = 0; n < 4; n++)  //cols
         {
-			for(n=0;n<3;n++)	//cols
-			{
-				for(m=0;m<4;m++) //rows
-				{
-					if (buttonPressd(Zahlenfeld[n][m])
-					{
-						inputCode[p] = (Zahlenfeld[n][m]);
-						Serial.println(ZahlenfeldPrint[n][m]);
-						delay(1);
-						++p;
-					}	
-				}
-			}	
-			if (buttonPressd(buttonHash))
-			{
-				Serial.println("--#--");
-
-				for (i = 0; i < (k); i++)
-				{
-				  if (inputCode[i] == secretCode[i])
-				  {
-					correct++;
-				  }
-				  
-				  //Check Code
-				  Serial.println("InputCode:");
-				  Serial.println(inputCode[i]);
-				  Serial.println("SecretCode:");
-				  Serial.println(secretCode[i]);
-				}
-
-				Serial.println("correct");
-				Serial.println(correct);
-				Serial.println("p");
-				Serial.println(p);
-				Serial.println("k");
-				Serial.println(k);
-
-				reset();
-
-				if ((correct == k) && (p == k))
-				{
-				  accesgranted();
-				  break;
-				}
-				else
-				{
-				  accesdenied();
-				  break;
-				} 
-			}
+          for (m = 0; m < 3; m++) //rows
+          {
+            if (buttonPressed(Zahlenfeld[n][m]))
+            {
+              inputCode[p] = (Zahlenfeld[n][m]);
+              Serial.println(ZahlenfeldPrint[n][m]);
+              delay(1);
+              ++p;
+            }
+          }
         }
+      }
+
+      if (buttonPressed(buttonHash))
+      {
+        Serial.println("--#--");
+
+        for (i = 0; i < (k); i++)
+        {
+          if (inputCode[i] == secretCode[i])
+          {
+            correct++;
+          }
+
+          //Check Code
+          Serial.println("InputCode:");
+          Serial.println(inputCode[i]);
+          Serial.println("SecretCode:");
+          Serial.println(secretCode[i]);
+        }
+
+        Serial.println("correct");
+        Serial.println(correct);
+        Serial.println("p");
+        Serial.println(p);
+        Serial.println("k");
+        Serial.println(k);
+
+        reset(); //reset code-vector
+
+        if ((correct == k) && (p == k))
+        {
+          accesgranted();
+          break;
+        }
+        else
+        {
+          accesdenied();
+          break;
+        }
+      }
     }
+  }
 }
 
 //=================================================================================================
-
 
 _Bool checkid(double idcard) //NFC ID's with Access
 {
@@ -271,13 +277,13 @@ _Bool checkid(double idcard) //NFC ID's with Access
     Serial.println("Card1");
     return true;
   }
- 
+
   else if (idcard == 1111111111)
   {
     Serial.println("Card2");
     return true;
   }
-   else if (idcard ==  1111111111)
+  else if (idcard == 1111111111)
   {
     Serial.println("Card3");
     return true;
@@ -291,14 +297,15 @@ _Bool checkid(double idcard) //NFC ID's with Access
 
 _Bool buttonPressed(int button)
 {
-	if (digitalRead(button) == LOW)
-	  {
-		while (1)
-		{
-		  if (digitalRead(button) == HIGH)
-				return true;
-		}
-return false;
+  if (digitalRead(button) == LOW)
+  {
+    while (1)
+    {
+      if (digitalRead(button) == HIGH)
+        return true;
+    }
+  }
+  return false;
 }
 
 void accesgranted()
