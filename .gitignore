@@ -210,13 +210,14 @@ TSWLatexianTemp*
 
 # KBibTeX
 *~[0-9]*
-.cproject
-.project
+
 .settings/
-Doc/
-tuerschlossnfc.c.rej
-.cproject
-.settings/
+core/
+libraries/
 Release/
-.ino.cpp
+.cproject
 .project
+*.ino.orig
+Doc/header/.gitignore
+.ino.cpp
+Doc/TuerschlossNFC.pdf
