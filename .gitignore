@@ -222,3 +222,4 @@ Doc/header/.gitignore
 .ino.cpp
 Doc/TuerschlossNFC.pdf
 Doc/Doc.pdf
+AccesCodes.txt

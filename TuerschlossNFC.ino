@@ -42,7 +42,7 @@ const int maxIN = (10 + 1); //Max Input
 char secretCode[] = {button1, button1, button1, button1}; //customize your Code
 const int k = sizeof(secretCode) / sizeof(secretCode[0]); //Password-length
 char inputCode[maxIN];
-const long keypadTimeout = 5000;
+const long keypadTimeout = 8000;
 
 #if defined(ARDUINO_ARCH_SAMD)
 // for Zero, output on USB Serial console, remove line below if using programming port to program the Zero!
@@ -242,7 +242,6 @@ _Bool checkid(double idcard) //NFC ID's with Access
     Serial.println("Card1");
     return true;
   }
-
   else if (idcard == 0000000000)
   {
     Serial.println("Card2");
