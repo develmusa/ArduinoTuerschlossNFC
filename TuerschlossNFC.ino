@@ -42,6 +42,7 @@ const int maxIN = (10 + 1); //Max Input
 char secretCode[] = {button1, button1, button1, button1}; //customize your Code
 const int k = sizeof(secretCode) / sizeof(secretCode[0]); //Password-length
 char inputCode[maxIN];
+const long keypadTimeout = 5000;
 
 #if defined(ARDUINO_ARCH_SAMD)
 // for Zero, output on USB Serial console, remove line below if using programming port to program the Zero!
@@ -112,7 +113,8 @@ void setup()
 //=========================================================================================
 void loop()
 {
-
+  unsigned long callTime = 0;
+  unsigned long runTime = 0;
   int breakFlag = 0;
   int p = 0;          //VarCountlenghtIN
 
@@ -174,7 +176,6 @@ void loop()
 
 //=====================================================================================================
 //Check Keypad-Input
-//TODO TIMEOUT
   Serial.println("Check for Input on Keypad");
 
   int Zahlenfeld[4][3] = {  {button1, button2, button3},
@@ -194,8 +195,15 @@ void loop()
     delay(20);
     digitalWrite(ledClose, LOW);
     reset();
+    callTime = millis(); //Set time of function-call
     while (1)
     {
+      runTime=millis();
+      if (runTime - callTime >= keypadTimeout) //Check for Timeout
+      {
+        Serial.println("Keypad Timeout");
+        breakFlag = 1;
+      }
       if (breakFlag)
         break;
       //Reset rows and cols var for loop
