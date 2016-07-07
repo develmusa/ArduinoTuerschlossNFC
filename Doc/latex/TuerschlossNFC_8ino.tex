@@ -1,0 +1,323 @@
+\hypertarget{TuerschlossNFC_8ino}{}\subsection{Tuerschloss\+N\+F\+C.\+ino File Reference}
+\label{TuerschlossNFC_8ino}\index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+
+
+Doorlock with Keypad and N\+FC.  
+
+
+{\ttfamily \#include $<$Wire.\+h$>$}\\*
+{\ttfamily \#include $<$S\+P\+I.\+h$>$}\\*
+{\ttfamily \#include $<$Adafruit\+\_\+\+P\+N532.\+h$>$}\\*
+\subsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_af529492b16e6032ea7f490ca3acccafc}{button0}~(2)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a4f09c26739530bc1c83dc50f141d98d5}{button1}~(10)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a6e17106861cf47adf973f4db91e02f49}{button2}~(0)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a2f30da60792e16049aae62431ce5ae04}{button3}~(11)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_ac7b90fb05639a7d1627a22976b8c6131}{button4}~(7)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_ab7f1f088106bd227bd06e9294e381a61}{button5}~(8)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a7cf5ee3e168e2ffc2d01785767f23c85}{button6}~(9)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a25878b08a6c1a976d153ae010444032a}{button7}~(4)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a633b5c76a0df4a36f06fbe627080a57f}{button8}~(5)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_ab83270eaa14655f4357bff54414987d3}{button9}~(6)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a5eab89f6902c757da5e895c3e73a7a03}{button\+Star}~(1)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_ae7eb87c68f75c9a985196f520c8f374c}{button\+Hash}~(3)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a09e95790e05ebb12cd1669fc42d087a6}{led\+Open}~(12)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_aa83f07fb722e1387ea802ee8733f43b7}{led\+Close}~(13)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a612d1fabdd304837022edda808c64ac0}{door\+Pin}~(A0)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a19c0d6db90035329695896e259b0da38}{P\+N532\+\_\+\+S\+CK}~(A1)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_acaae8222f874e7ae5c75325213ccb54a}{P\+N532\+\_\+\+M\+O\+SI}~(A2)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a5fe7fdc589cffb666bd7ebf2a963ea63}{P\+N532\+\_\+\+SS}~(A3)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a7cc71e42d70cfd7298b007770c37ec60}{P\+N532\+\_\+\+M\+I\+SO}~(A4)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a04eeb1db4f8381537f1075bb5abd4b36}{P\+N532\+\_\+\+I\+RQ}~(A1)
+\item 
+\#define \hyperlink{TuerschlossNFC_8ino_a3f932648db5f69fee59502642fb26147}{P\+N532\+\_\+\+R\+E\+S\+ET}~(A2)
+\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+P\+N532 \hyperlink{TuerschlossNFC_8ino_a677e2132f2f9bbc9f391e9caa51aeee8}{nfc} (\hyperlink{TuerschlossNFC_8ino_a19c0d6db90035329695896e259b0da38}{P\+N532\+\_\+\+S\+CK}, \hyperlink{TuerschlossNFC_8ino_a7cc71e42d70cfd7298b007770c37ec60}{P\+N532\+\_\+\+M\+I\+SO}, \hyperlink{TuerschlossNFC_8ino_acaae8222f874e7ae5c75325213ccb54a}{P\+N532\+\_\+\+M\+O\+SI}, \hyperlink{TuerschlossNFC_8ino_a5fe7fdc589cffb666bd7ebf2a963ea63}{P\+N532\+\_\+\+SS})
+\item 
+void \hyperlink{TuerschlossNFC_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup} ()
+\item 
+void \hyperlink{TuerschlossNFC_8ino_afe461d27b9c48d5921c00d521181f12f}{loop} ()
+\item 
+\+\_\+\+Bool \hyperlink{TuerschlossNFC_8ino_aae14c356a558c5c377418831bba10961}{checkid} (double idcard)
+\begin{DoxyCompactList}\small\item\em Check if ID is authorized. \end{DoxyCompactList}\item 
+\+\_\+\+Bool \hyperlink{TuerschlossNFC_8ino_a5fe99fa9bcb6cd3379e5ca86647b687d}{button\+Pressed} (int button)
+\begin{DoxyCompactList}\small\item\em Check if Button is pressed. \end{DoxyCompactList}\item 
+void \hyperlink{TuerschlossNFC_8ino_aea979bf0d31538be11c0e2376c7e596d}{check\+Code} (int p)
+\begin{DoxyCompactList}\small\item\em Check if Code is correct. \end{DoxyCompactList}\item 
+void \hyperlink{TuerschlossNFC_8ino_ac09f3a433d14a38c0c7f8820894a035c}{accesgranted} ()
+\begin{DoxyCompactList}\small\item\em Open the Door. \end{DoxyCompactList}\item 
+void \hyperlink{TuerschlossNFC_8ino_ad16dfeef169b4b2cece036958cca6d92}{accesdenied} ()
+\begin{DoxyCompactList}\small\item\em Leave the Door closed. \end{DoxyCompactList}\item 
+void \hyperlink{TuerschlossNFC_8ino_ad20897c5c8bd47f5d4005989bead0e55}{reset} ()
+\begin{DoxyCompactList}\small\item\em Reset Input-\/\+Array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \hyperlink{TuerschlossNFC_8ino_a19fc6d5167836668952e3419f7f4d88a}{max\+IN} = (10 + 1)
+\item 
+char \hyperlink{TuerschlossNFC_8ino_a13219271ff45946b1226a309506f2d01}{secret\+Code} \mbox{[}$\,$\mbox{]} = \{\hyperlink{TuerschlossNFC_8ino_a4f09c26739530bc1c83dc50f141d98d5}{button1}, \hyperlink{TuerschlossNFC_8ino_a4f09c26739530bc1c83dc50f141d98d5}{button1}, \hyperlink{TuerschlossNFC_8ino_a4f09c26739530bc1c83dc50f141d98d5}{button1}, \hyperlink{TuerschlossNFC_8ino_a4f09c26739530bc1c83dc50f141d98d5}{button1}\}
+\item 
+const int \hyperlink{TuerschlossNFC_8ino_aeac95f79b72f13ef3244522682ba9a21}{k} = sizeof(\hyperlink{TuerschlossNFC_8ino_a13219271ff45946b1226a309506f2d01}{secret\+Code}) / sizeof(\hyperlink{TuerschlossNFC_8ino_a13219271ff45946b1226a309506f2d01}{secret\+Code}\mbox{[}0\mbox{]})
+\item 
+char \hyperlink{TuerschlossNFC_8ino_a63f2655f6a154dede1622b1fd5fc2e36}{input\+Code} \mbox{[}\hyperlink{TuerschlossNFC_8ino_a19fc6d5167836668952e3419f7f4d88a}{max\+IN}\mbox{]}
+\item 
+const long \hyperlink{TuerschlossNFC_8ino_a491df98d0a1b82a8dc435d99cc94e733}{keypad\+Timeout} = 8000
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Doorlock with Keypad and N\+FC. 
+
+\begin{DoxyAuthor}{Author}
+Luca Mazzoleni
+\end{DoxyAuthor}
+Board\+: Arduino Leonardo ~\newline
+ Library\+: \href{https://github.com/adafruit/Adafruit-PN532}{\tt https\+://github.\+com/adafruit/\+Adafruit-\/\+P\+N532} ~\newline
+ Item List will follow.. 
+
+\subsubsection{Macro Definition Documentation}
+\index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button0@{button0}}
+\index{button0@{button0}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button0}{button0}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button0~(2)}\hypertarget{TuerschlossNFC_8ino_af529492b16e6032ea7f490ca3acccafc}{}\label{TuerschlossNFC_8ino_af529492b16e6032ea7f490ca3acccafc}
+Keypad Nr. 0 Pin 2 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button1@{button1}}
+\index{button1@{button1}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button1}{button1}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button1~(10)}\hypertarget{TuerschlossNFC_8ino_a4f09c26739530bc1c83dc50f141d98d5}{}\label{TuerschlossNFC_8ino_a4f09c26739530bc1c83dc50f141d98d5}
+Keypad Nr. 1 Pin 10 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button2@{button2}}
+\index{button2@{button2}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button2}{button2}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button2~(0)}\hypertarget{TuerschlossNFC_8ino_a6e17106861cf47adf973f4db91e02f49}{}\label{TuerschlossNFC_8ino_a6e17106861cf47adf973f4db91e02f49}
+Keypad Nr. 2 Pin 0 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button3@{button3}}
+\index{button3@{button3}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button3}{button3}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button3~(11)}\hypertarget{TuerschlossNFC_8ino_a2f30da60792e16049aae62431ce5ae04}{}\label{TuerschlossNFC_8ino_a2f30da60792e16049aae62431ce5ae04}
+Keypad Nr. 3 Pin 11 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button4@{button4}}
+\index{button4@{button4}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button4}{button4}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button4~(7)}\hypertarget{TuerschlossNFC_8ino_ac7b90fb05639a7d1627a22976b8c6131}{}\label{TuerschlossNFC_8ino_ac7b90fb05639a7d1627a22976b8c6131}
+Keypad Nr. 4 Pin 7 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button5@{button5}}
+\index{button5@{button5}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button5}{button5}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button5~(8)}\hypertarget{TuerschlossNFC_8ino_ab7f1f088106bd227bd06e9294e381a61}{}\label{TuerschlossNFC_8ino_ab7f1f088106bd227bd06e9294e381a61}
+Keypad Nr. 5 Pin 8 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button6@{button6}}
+\index{button6@{button6}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button6}{button6}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button6~(9)}\hypertarget{TuerschlossNFC_8ino_a7cf5ee3e168e2ffc2d01785767f23c85}{}\label{TuerschlossNFC_8ino_a7cf5ee3e168e2ffc2d01785767f23c85}
+Keypad Nr. 6 Pin 9 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button7@{button7}}
+\index{button7@{button7}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button7}{button7}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button7~(4)}\hypertarget{TuerschlossNFC_8ino_a25878b08a6c1a976d153ae010444032a}{}\label{TuerschlossNFC_8ino_a25878b08a6c1a976d153ae010444032a}
+Keypad Nr. 7 Pin 4 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button8@{button8}}
+\index{button8@{button8}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button8}{button8}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button8~(5)}\hypertarget{TuerschlossNFC_8ino_a633b5c76a0df4a36f06fbe627080a57f}{}\label{TuerschlossNFC_8ino_a633b5c76a0df4a36f06fbe627080a57f}
+Keypad Nr. 8 Pin 5 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button9@{button9}}
+\index{button9@{button9}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button9}{button9}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button9~(6)}\hypertarget{TuerschlossNFC_8ino_ab83270eaa14655f4357bff54414987d3}{}\label{TuerschlossNFC_8ino_ab83270eaa14655f4357bff54414987d3}
+Keypad Nr. 9 Pin 6 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button\+Hash@{button\+Hash}}
+\index{button\+Hash@{button\+Hash}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button\+Hash}{buttonHash}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button\+Hash~(3)}\hypertarget{TuerschlossNFC_8ino_ae7eb87c68f75c9a985196f520c8f374c}{}\label{TuerschlossNFC_8ino_ae7eb87c68f75c9a985196f520c8f374c}
+Keypad Nr. \# Pin 3 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button\+Star@{button\+Star}}
+\index{button\+Star@{button\+Star}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button\+Star}{buttonStar}}]{\setlength{\rightskip}{0pt plus 5cm}\#define button\+Star~(1)}\hypertarget{TuerschlossNFC_8ino_a5eab89f6902c757da5e895c3e73a7a03}{}\label{TuerschlossNFC_8ino_a5eab89f6902c757da5e895c3e73a7a03}
+Keypad Nr. $\ast$ Pin 1 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!door\+Pin@{door\+Pin}}
+\index{door\+Pin@{door\+Pin}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{door\+Pin}{doorPin}}]{\setlength{\rightskip}{0pt plus 5cm}\#define door\+Pin~(A0)}\hypertarget{TuerschlossNFC_8ino_a612d1fabdd304837022edda808c64ac0}{}\label{TuerschlossNFC_8ino_a612d1fabdd304837022edda808c64ac0}
+Operates a 5V Relais Pin A0 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!led\+Close@{led\+Close}}
+\index{led\+Close@{led\+Close}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{led\+Close}{ledClose}}]{\setlength{\rightskip}{0pt plus 5cm}\#define led\+Close~(13)}\hypertarget{TuerschlossNFC_8ino_aa83f07fb722e1387ea802ee8733f43b7}{}\label{TuerschlossNFC_8ino_aa83f07fb722e1387ea802ee8733f43b7}
+Red L\+ED Pin 13 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!led\+Open@{led\+Open}}
+\index{led\+Open@{led\+Open}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{led\+Open}{ledOpen}}]{\setlength{\rightskip}{0pt plus 5cm}\#define led\+Open~(12)}\hypertarget{TuerschlossNFC_8ino_a09e95790e05ebb12cd1669fc42d087a6}{}\label{TuerschlossNFC_8ino_a09e95790e05ebb12cd1669fc42d087a6}
+Green L\+ED Pin 12 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!P\+N532\+\_\+\+I\+RQ@{P\+N532\+\_\+\+I\+RQ}}
+\index{P\+N532\+\_\+\+I\+RQ@{P\+N532\+\_\+\+I\+RQ}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{P\+N532\+\_\+\+I\+RQ}{PN532_IRQ}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+N532\+\_\+\+I\+RQ~(A1)}\hypertarget{TuerschlossNFC_8ino_a04eeb1db4f8381537f1075bb5abd4b36}{}\label{TuerschlossNFC_8ino_a04eeb1db4f8381537f1075bb5abd4b36}
+N\+FC Interrupt Request Pin A1 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!P\+N532\+\_\+\+M\+I\+SO@{P\+N532\+\_\+\+M\+I\+SO}}
+\index{P\+N532\+\_\+\+M\+I\+SO@{P\+N532\+\_\+\+M\+I\+SO}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{P\+N532\+\_\+\+M\+I\+SO}{PN532_MISO}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+N532\+\_\+\+M\+I\+SO~(A4)}\hypertarget{TuerschlossNFC_8ino_a7cc71e42d70cfd7298b007770c37ec60}{}\label{TuerschlossNFC_8ino_a7cc71e42d70cfd7298b007770c37ec60}
+N\+FC Master Input, Slave Output Pin A4 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!P\+N532\+\_\+\+M\+O\+SI@{P\+N532\+\_\+\+M\+O\+SI}}
+\index{P\+N532\+\_\+\+M\+O\+SI@{P\+N532\+\_\+\+M\+O\+SI}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{P\+N532\+\_\+\+M\+O\+SI}{PN532_MOSI}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+N532\+\_\+\+M\+O\+SI~(A2)}\hypertarget{TuerschlossNFC_8ino_acaae8222f874e7ae5c75325213ccb54a}{}\label{TuerschlossNFC_8ino_acaae8222f874e7ae5c75325213ccb54a}
+N\+FC Master Output, Slave Input Pin A2 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!P\+N532\+\_\+\+R\+E\+S\+ET@{P\+N532\+\_\+\+R\+E\+S\+ET}}
+\index{P\+N532\+\_\+\+R\+E\+S\+ET@{P\+N532\+\_\+\+R\+E\+S\+ET}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{P\+N532\+\_\+\+R\+E\+S\+ET}{PN532_RESET}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+N532\+\_\+\+R\+E\+S\+ET~(A2)}\hypertarget{TuerschlossNFC_8ino_a3f932648db5f69fee59502642fb26147}{}\label{TuerschlossNFC_8ino_a3f932648db5f69fee59502642fb26147}
+Not connected by default on the N\+FC Shield \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!P\+N532\+\_\+\+S\+CK@{P\+N532\+\_\+\+S\+CK}}
+\index{P\+N532\+\_\+\+S\+CK@{P\+N532\+\_\+\+S\+CK}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{P\+N532\+\_\+\+S\+CK}{PN532_SCK}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+N532\+\_\+\+S\+CK~(A1)}\hypertarget{TuerschlossNFC_8ino_a19c0d6db90035329695896e259b0da38}{}\label{TuerschlossNFC_8ino_a19c0d6db90035329695896e259b0da38}
+N\+FC Serial Clock Pin A1 \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!P\+N532\+\_\+\+SS@{P\+N532\+\_\+\+SS}}
+\index{P\+N532\+\_\+\+SS@{P\+N532\+\_\+\+SS}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{P\+N532\+\_\+\+SS}{PN532_SS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+N532\+\_\+\+SS~(A3)}\hypertarget{TuerschlossNFC_8ino_a5fe7fdc589cffb666bd7ebf2a963ea63}{}\label{TuerschlossNFC_8ino_a5fe7fdc589cffb666bd7ebf2a963ea63}
+N\+FC Slave Select Pin A3 
+
+\subsubsection{Function Documentation}
+\index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!accesdenied@{accesdenied}}
+\index{accesdenied@{accesdenied}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{accesdenied()}{accesdenied()}}]{\setlength{\rightskip}{0pt plus 5cm}void accesdenied (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{TuerschlossNFC_8ino_ad16dfeef169b4b2cece036958cca6d92}{}\label{TuerschlossNFC_8ino_ad16dfeef169b4b2cece036958cca6d92}
+
+
+Leave the Door closed. 
+
+Set the Red L\+ED to H\+I\+GH for 1 Sec. \begin{DoxyReturn}{Returns}
+Void. 
+\end{DoxyReturn}
+\index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!accesgranted@{accesgranted}}
+\index{accesgranted@{accesgranted}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{accesgranted()}{accesgranted()}}]{\setlength{\rightskip}{0pt plus 5cm}void accesgranted (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{TuerschlossNFC_8ino_ac09f3a433d14a38c0c7f8820894a035c}{}\label{TuerschlossNFC_8ino_ac09f3a433d14a38c0c7f8820894a035c}
+
+
+Open the Door. 
+
+Set the Green Led to H\+I\+GH and open the Door for 2 Sec. \begin{DoxyReturn}{Returns}
+Void 
+\end{DoxyReturn}
+\index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!button\+Pressed@{button\+Pressed}}
+\index{button\+Pressed@{button\+Pressed}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{button\+Pressed(int button)}{buttonPressed(int button)}}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+Bool button\+Pressed (
+\begin{DoxyParamCaption}
+\item[{int}]{button}
+\end{DoxyParamCaption}
+)}\hypertarget{TuerschlossNFC_8ino_a5fe99fa9bcb6cd3379e5ca86647b687d}{}\label{TuerschlossNFC_8ino_a5fe99fa9bcb6cd3379e5ca86647b687d}
+
+
+Check if Button is pressed. 
+
+Check if Button switch from High to Low and Back to High 
+\begin{DoxyParams}{Parameters}
+{\em button} & scanned Button \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if Pressed False if not 
+\end{DoxyReturn}
+\index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!check\+Code@{check\+Code}}
+\index{check\+Code@{check\+Code}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{check\+Code(int p)}{checkCode(int p)}}]{\setlength{\rightskip}{0pt plus 5cm}void check\+Code (
+\begin{DoxyParamCaption}
+\item[{int}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{TuerschlossNFC_8ino_aea979bf0d31538be11c0e2376c7e596d}{}\label{TuerschlossNFC_8ino_aea979bf0d31538be11c0e2376c7e596d}
+
+
+Check if Code is correct. 
+
+Check if input code is the same as the secret code 
+\begin{DoxyParams}{Parameters}
+{\em p} & Count of pressed Buttons \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Void 
+\end{DoxyReturn}
+\index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!checkid@{checkid}}
+\index{checkid@{checkid}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{checkid(double idcard)}{checkid(double idcard)}}]{\setlength{\rightskip}{0pt plus 5cm}\+\_\+\+Bool checkid (
+\begin{DoxyParamCaption}
+\item[{double}]{idcard}
+\end{DoxyParamCaption}
+)}\hypertarget{TuerschlossNFC_8ino_aae14c356a558c5c377418831bba10961}{}\label{TuerschlossNFC_8ino_aae14c356a558c5c377418831bba10961}
+
+
+Check if ID is authorized. 
+
+If the N\+FC ID from the scanned Card is saved in the authorized List ~\newline
+You need to Edit here, if you like to add your Card! 
+\begin{DoxyParams}{Parameters}
+{\em idcard} & N\+FC ID from the scanned Card \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if Authorized ~\newline
+ False if not 
+\end{DoxyReturn}
+\index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!loop@{loop}}
+\index{loop@{loop}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{loop()}{loop()}}]{\setlength{\rightskip}{0pt plus 5cm}void loop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{TuerschlossNFC_8ino_afe461d27b9c48d5921c00d521181f12f}{}\label{TuerschlossNFC_8ino_afe461d27b9c48d5921c00d521181f12f}
+T\+O\+DO\+:Fix Hardware Issue-\/$>$switch to led\+Open when fixed \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!nfc@{nfc}}
+\index{nfc@{nfc}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{nfc(\+P\+N532\+\_\+\+S\+C\+K, P\+N532\+\_\+\+M\+I\+S\+O, P\+N532\+\_\+\+M\+O\+S\+I, P\+N532\+\_\+\+S\+S)}{nfc(PN532_SCK, PN532_MISO, PN532_MOSI, PN532_SS)}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+\+P\+N532 nfc (
+\begin{DoxyParamCaption}
+\item[{{\bf P\+N532\+\_\+\+S\+CK}}]{, }
+\item[{{\bf P\+N532\+\_\+\+M\+I\+SO}}]{, }
+\item[{{\bf P\+N532\+\_\+\+M\+O\+SI}}]{, }
+\item[{{\bf P\+N532\+\_\+\+SS}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{TuerschlossNFC_8ino_a677e2132f2f9bbc9f391e9caa51aeee8}{}\label{TuerschlossNFC_8ino_a677e2132f2f9bbc9f391e9caa51aeee8}
+Check Adafruit library for more Information \href{https://github.com/adafruit/Adafruit-PN532}{\tt https\+://github.\+com/adafruit/\+Adafruit-\/\+P\+N532} 
+\begin{DoxyParams}{Parameters}
+{\em P\+N532\+\_\+\+S\+CK} & Serial Clock \\
+\hline
+{\em P\+N532\+\_\+\+M\+I\+SO} & Master Input, Slave Outpu \\
+\hline
+{\em P\+N532\+\_\+\+M\+O\+SI} & Master Output, Slave Input \\
+\hline
+{\em P\+N532\+\_\+\+SS} & Slave Select \\
+\hline
+\end{DoxyParams}
+\index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!reset@{reset}}
+\index{reset@{reset}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{reset()}{reset()}}]{\setlength{\rightskip}{0pt plus 5cm}void reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{TuerschlossNFC_8ino_ad20897c5c8bd47f5d4005989bead0e55}{}\label{TuerschlossNFC_8ino_ad20897c5c8bd47f5d4005989bead0e55}
+
+
+Reset Input-\/\+Array. 
+
+Reset Input\+Code-\/array by filling with Zeros \begin{DoxyReturn}{Returns}
+Void 
+\end{DoxyReturn}
+\index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!setup@{setup}}
+\index{setup@{setup}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{setup()}{setup()}}]{\setlength{\rightskip}{0pt plus 5cm}void setup (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{TuerschlossNFC_8ino_a4fc01d736fe50cf5b977f755b675f11d}{}\label{TuerschlossNFC_8ino_a4fc01d736fe50cf5b977f755b675f11d}
+
+
+\subsubsection{Variable Documentation}
+\index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!input\+Code@{input\+Code}}
+\index{input\+Code@{input\+Code}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{input\+Code}{inputCode}}]{\setlength{\rightskip}{0pt plus 5cm}char input\+Code\mbox{[}{\bf max\+IN}\mbox{]}}\hypertarget{TuerschlossNFC_8ino_a63f2655f6a154dede1622b1fd5fc2e36}{}\label{TuerschlossNFC_8ino_a63f2655f6a154dede1622b1fd5fc2e36}
+Initialize a Array for the Inputs \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!k@{k}}
+\index{k@{k}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{k}{k}}]{\setlength{\rightskip}{0pt plus 5cm}const int k = sizeof({\bf secret\+Code}) / sizeof({\bf secret\+Code}\mbox{[}0\mbox{]})}\hypertarget{TuerschlossNFC_8ino_aeac95f79b72f13ef3244522682ba9a21}{}\label{TuerschlossNFC_8ino_aeac95f79b72f13ef3244522682ba9a21}
+Length of your Secret\+Code \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!keypad\+Timeout@{keypad\+Timeout}}
+\index{keypad\+Timeout@{keypad\+Timeout}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{keypad\+Timeout}{keypadTimeout}}]{\setlength{\rightskip}{0pt plus 5cm}const long keypad\+Timeout = 8000}\hypertarget{TuerschlossNFC_8ino_a491df98d0a1b82a8dc435d99cc94e733}{}\label{TuerschlossNFC_8ino_a491df98d0a1b82a8dc435d99cc94e733}
+Set a Timeout for the Keypad \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!max\+IN@{max\+IN}}
+\index{max\+IN@{max\+IN}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{max\+IN}{maxIN}}]{\setlength{\rightskip}{0pt plus 5cm}const int max\+IN = (10 + 1)}\hypertarget{TuerschlossNFC_8ino_a19fc6d5167836668952e3419f7f4d88a}{}\label{TuerschlossNFC_8ino_a19fc6d5167836668952e3419f7f4d88a}
+Max length of Input \index{Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}!secret\+Code@{secret\+Code}}
+\index{secret\+Code@{secret\+Code}!Tuerschloss\+N\+F\+C.\+ino@{Tuerschloss\+N\+F\+C.\+ino}}
+\paragraph[{\texorpdfstring{secret\+Code}{secretCode}}]{\setlength{\rightskip}{0pt plus 5cm}char secret\+Code\mbox{[}$\,$\mbox{]} = \{{\bf button1}, {\bf button1}, {\bf button1}, {\bf button1}\}}\hypertarget{TuerschlossNFC_8ino_a13219271ff45946b1226a309506f2d01}{}\label{TuerschlossNFC_8ino_a13219271ff45946b1226a309506f2d01}
+customize your Code here 

@@ -1,52 +1,98 @@
-//Doorlock with Keypad Luca Mazzoleni 09.07.2015
-//Arduino Leonardo
-//Upgrading for NFC-Tags 22.06.2016
 //Edited Matrix-request in for Loop
 //library https://github.com/adafruit/Adafruit-PN532
+/**
+ * @file TuerschlossNFC.ino
+ * @author Luca Mazzoleni
+ *
+ * @brief  Doorlock with Keypad and NFC
+ *
+ *  Board: Arduino Leonardo \n
+ *  Library: \link{https://github.com/adafruit/Adafruit-PN532\endlink \n
+ *  Item List will follow..
+ *
+ */
 
+/* Includes */
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_PN532.h>
 
+/**Keypad Nr. 0 Pin 2*/
 #define button0  (2)
+/**Keypad Nr. 1 Pin 10*/
 #define button1 (10)
+/**Keypad Nr. 2 Pin 0*/
 #define button2  (0)
+/**Keypad Nr. 3 Pin 11*/
 #define button3 (11)
+/**Keypad Nr. 4 Pin 7*/
 #define button4  (7)
+/**Keypad Nr. 5 Pin 8*/
 #define button5  (8)
+/**Keypad Nr. 6 Pin 9*/
 #define button6  (9)
+/**Keypad Nr. 7 Pin 4*/
 #define button7  (4)
+/**Keypad Nr. 8 Pin 5*/
 #define button8  (5)
+/**Keypad Nr. 9 Pin 6*/
 #define button9  (6)
+/**Keypad Nr. * Pin 1*/
 #define buttonStar (1)
+/**Keypad Nr. # Pin 3*/
 #define buttonHash (3)
+/**Green LED Pin 12*/
 #define ledOpen   (12)
+/**Red LED Pin 13*/
 #define ledClose  (13)
+/**Operates a 5V Relais Pin A0*/
 #define doorPin   (A0)
 //NFC
+/**NFC Serial Clock Pin A1*/
 #define PN532_SCK  (A1)
+/**NFC Master Output, Slave Input Pin A2*/
 #define PN532_MOSI (A2)
+/**NFC Slave Select Pin A3*/
 #define PN532_SS   (A3)
+ /**NFC Master Input, Slave Output Pin A4*/
 #define PN532_MISO (A4)
 
+/**NFC Interrupt Request Pin A1*/
 #define PN532_IRQ   (A1)
-#define PN532_RESET (A2)  // Not connected by default on the NFC Shield
+/**Not connected by default on the NFC Shield*/
+#define PN532_RESET (A2)
 
 //SPI connection
+/**Check Adafruit library for more Information \link{https://github.com/adafruit/Adafruit-PN532\endlink
+ * @param PN532_SCK Serial Clock
+ * @param PN532_MISO Master Input, Slave Outpu
+ * @param PN532_MOSI Master Output, Slave Input
+ * @param PN532_SS Slave Select
+ * */
 Adafruit_PN532 nfc(PN532_SCK,
                    PN532_MISO,
                    PN532_MOSI,
                    PN532_SS);
 
-const int maxIN = (10 + 1); //Max Input
-char secretCode[] = {button1, button1, button1, button1}; //customize your Code
-const int k = sizeof(secretCode) / sizeof(secretCode[0]); //Password-length
+/** Max length of Input*/
+const int maxIN = (10 + 1);
+
+/** customize your Code here */
+char secretCode[] = {button1, button1, button1, button1};
+
+/** Length of your SecretCode */
+const int k = sizeof(secretCode) / sizeof(secretCode[0]);
+
+/**Initialize a Array for the Inputs*/
 char inputCode[maxIN];
+
+/**Set a Timeout for the Keypad */
 const long keypadTimeout = 8000;
 
 #if defined(ARDUINO_ARCH_SAMD)
-// for Zero, output on USB Serial console, remove line below if using programming port to program the Zero!
-// also change #define in Adafruit_PN532.cpp library file
+/** for Zero, output on USB Serial console, remove line below if using programming port to program the Zero!
+ *also change #define in Adafruit_PN532.cpp library file
+ */
 #define Serial SerialUSB
 #endif
 
@@ -104,8 +150,8 @@ void setup()
   Serial.print('.');
   Serial.println((versiondata >> 8) & 0xFF, DEC);
 
-  // configure board to read RFID tags
-  nfc.SAMConfig();
+
+  nfc.SAMConfig();   // configure board to read RFID tags
 
   Serial.println("Waiting for an ISO14443A Card ...");
 }
@@ -119,12 +165,12 @@ void loop()
   int p = 0;          //VarCountlenghtIN
 
   uint8_t success;
-  uint8_t uid[] = {0, 0, 0, 0, 0, 0, 0};  // Buffer to store the returned UID
-  uint8_t uidLength; // Length of the UID (4 or 7 bytes depending on ISO14443A card type)
+  uint8_t uid[] = {0, 0, 0, 0, 0, 0, 0};  /* Buffer to store the returned UID */
+  uint8_t uidLength; /* Length of the UID (4 or 7 bytes depending on ISO14443A card type)*/
 
   void accesgranted();
   void accesdenied();
-  void reset();       //reset Inputcode-array
+  void reset();
   _Bool checkid(double idcard);
   _Bool buttonPressed(int button);
   void checkCode(int p);
@@ -191,7 +237,7 @@ void loop()
   if (buttonPressed(buttonStar))
   {
     Serial.println("--*--");
-    digitalWrite(ledClose, HIGH); //TODO:Fix Hardware Issue->switch to ledOpen when fixed
+    digitalWrite(ledClose, HIGH); /**TODO:Fix Hardware Issue->switch to ledOpen when fixed*/
     delay(20);
     digitalWrite(ledClose, LOW);
     reset();
@@ -234,7 +280,14 @@ void loop()
 
 //=================================================================================================
 
-_Bool checkid(double idcard) //NFC ID's with Access
+_Bool checkid(double idcard)
+/** @brief Check if ID is authorized
+ *
+ * If the NFC ID from the scanned Card is saved in the authorized List \n
+ * You need to Edit here, if you like to add your Card!
+ * @param idcard NFC ID from the scanned Card
+ * @return True if Authorized \n
+ *         False if not*/
 {
   Serial.println(idcard); //you need to add the id of your authorized card here instead of 1's
   if (idcard == 0000000000)
@@ -260,6 +313,12 @@ _Bool checkid(double idcard) //NFC ID's with Access
 }
 
 _Bool buttonPressed(int button)
+/** @brief Check if Button is pressed
+ *
+ * Check if Button switch from High to Low and Back to High
+ * @param button scanned Button
+ * @return True if Pressed
+ *         False if not*/
 {
   if (digitalRead(button) == LOW)
   {
@@ -271,7 +330,14 @@ _Bool buttonPressed(int button)
   }
   return false;
 }
+
 void checkCode(int p)
+/** @brief Check if Code is correct
+ *
+ * Check if input code is the same as the secret code
+ * @param p Count of pressed Buttons
+ * @return Void
+ */
 {
   Serial.println("Function checkCode");
   int i;              //VarInputCode
@@ -295,6 +361,11 @@ void checkCode(int p)
 }
 
 void accesgranted()
+/** @brief Open the Door
+ *
+ *  Set the Green Led to HIGH and open the Door for 2 Sec.
+ *  @return Void
+ */
 {
   Serial.println("Access granted");
   delay(1);
@@ -306,6 +377,11 @@ void accesgranted()
 }
 
 void accesdenied()
+/** @brief Leave the Door closed
+ *
+ * Set the Red LED to HIGH for 1 Sec.
+ * @return Void.
+ */
 {
   Serial.println("Access denied");
   delay(1);
@@ -314,7 +390,12 @@ void accesdenied()
   digitalWrite(ledClose, LOW);
 }
 
-void reset()  //InputCode-Array fill with 0's
+void reset()
+/** @brief Reset Input-Array
+ *
+ * Reset InputCode-array by filling with Zeros
+ * @return Void
+ */
 {
   Serial.println("Reset");
   int r;  //VarReset
