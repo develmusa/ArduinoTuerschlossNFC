@@ -220,3 +220,4 @@ Release/
 *.ino.orig
 AccesCodes.txt
 *.ino.cpp
+Doc/html

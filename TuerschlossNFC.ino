@@ -1,5 +1,3 @@
-//Edited Matrix-request in for Loop
-//library https://github.com/adafruit/Adafruit-PN532
 /**
  * @file TuerschlossNFC.ino
  * @author Luca Mazzoleni
