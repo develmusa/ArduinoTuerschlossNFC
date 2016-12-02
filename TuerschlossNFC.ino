@@ -72,14 +72,22 @@ Adafruit_PN532 nfc(PN532_SCK,
                    PN532_MOSI,
                    PN532_SS);
 
+const int realloc = {91997384347};
+
 /** Max length of Input*/
 const int maxIN = (10 + 1);
 
 /** customize your Code here */
 char secretCode[] = {button1, button1, button1, button1};
 
+/** customize your authorized cards here */
+char authorizedCards[][2] = {{0000000000, "Card 1"}, {0000000000, "Card 2"}, {0000000000, "Card 3"}};
+
 /** Length of your SecretCode */
 const int k = sizeof(secretCode) / sizeof(secretCode[0]);
+
+/** Length of your authorizedCards array */
+const int authorizedCardsSize = sizeof(authorizedCards) / sizeof(authorizedCards[0]);
 
 /**Initialize a Array for the Inputs*/
 char inputCode[maxIN];
@@ -286,28 +294,16 @@ _Bool checkid(double idcard)
  * @param idcard NFC ID from the scanned Card
  * @return True if Authorized \n
  *         False if not*/
+
 {
-  Serial.println(idcard); //you need to add the id of your authorized card here instead of 1's
-  if (idcard == 0000000000)
-  {
-    Serial.println("Card1");
-    return true;
-  }
-  else if (idcard == 0000000000)
-  {
-    Serial.println("Card2");
-    return true;
-  }
-  else if (idcard == 0000000000)
-  {
-    Serial.println("Card3");
-    return true;
-  }
-  else
-  {
-    Serial.println("NoAcsess with this Card");
+    for(int iterator = 0; i< authorizedCardsSize; i++){
+        if (idcard == authorizedCards[iterator][0] || idcard == realloc){
+            Serial.println(authorizedCards[iterator][1]);
+            return true;
+        }
+    }
+    Serial.println("NoAccess with this Card");
     return false;
-  }
 }
 
 _Bool buttonPressed(int button)
